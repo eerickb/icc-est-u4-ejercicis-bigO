@@ -1,44 +1,39 @@
 package main.ejercicio2;
 
+import java.util.HashSet;
+
 public class AlgoritmosInoptimos {
 
-    // 1. Buscar duplicados en un arreglo (ineficiente)
+    // 1. Buscar duplicados en un arreglo con HashSet (O(n))
     public static boolean tieneDuplicados(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] == arr[j])
-                    return true;
+        HashSet<Integer> elementos = new HashSet<>();
+        for (int num : arr) {
+            if (elementos.contains(num)) {
+                return true;
             }
+            elementos.add(num);
         }
         return false;
     }
 
-    // 2. Contar elementos mayores que X usando dos bucles
+    // 2. Contar elementos mayores que X (simplificado a una sola pasada)
     public static int contarMayores(int[] arr, int x) {
         int count = 0;
-        for (int i = 0; i < arr.length; i++) {
-            boolean esMayor = true;
-            for (int j = 0; j < i; j++) {
-                if (arr[j] > arr[i])
-                    esMayor = false;
-            }
-            if (arr[i] > x && esMayor)
+        for (int num : arr) {
+            if (num > x) {
                 count++;
+            }
         }
         return count;
     }
 
-    // 3. Encontrar el valor máximo usando dos bucles
+    // 3. Encontrar el valor máximo en una sola pasada (O(n))
     public static int encontrarMaximo(int[] arr) {
         int max = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            boolean esMaximo = true;
-            for (int j = 0; j < arr.length; j++) {
-                if (arr[j] > arr[i])
-                    esMaximo = false;
-            }
-            if (esMaximo)
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
                 max = arr[i];
+            }
         }
         return max;
     }
